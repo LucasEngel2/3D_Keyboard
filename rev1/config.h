@@ -5,7 +5,7 @@
 #define PRODUCT_ID   0x0000
 #define DEVICE_VER   0x0001
 #define MANUFACTURER One_Sleeve
-#define PRODUCT      38key_3D_Fuckery
+#define PRODUCT      3D_Keyboard
 
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 5

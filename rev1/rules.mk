@@ -3,4 +3,4 @@ BOOTLOADER = atmel-dfu
         
 SPLIT_KEYBOARD = yes
 
-DEFAULT_FOLDER = 38D_Keyboard/rev1
+DEFAULT_FOLDER = 3D_Keyboard/rev1
