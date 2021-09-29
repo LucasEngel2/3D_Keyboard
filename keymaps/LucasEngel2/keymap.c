@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
     [_MOD2] = LAYOUT(
-	KC_NO, 	    KC_NO, 		KC_GRV, 	KC_AT, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+	KC_NO, 	    KC_NO, 		KC_GRV, 	KC_AT, 		KC_NO, 		KC_NO, 		KC_MRWD, 	KC_MPLY, 	KC_MFFD, 	KC_NO,
 	KC_NO, 		KC_HASH, 	KC_LPRN, 	KC_RPRN, 	KC_NO, 		KC_NO, 		KC_UNDS, 	KC_EQL, 	KC_BSLS,	KC_F5,
 	KC_LSFT,	KC_DLR, 	KC_LBRC, 	KC_RBRC, 	KC_NO, 		KC_NO, 		KC_TAB, 	KC_LALT, 	KC_AMPR, 	KC_NO,
 				KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		LALT(KC_F4),KC_LGUI, 	KC_DEL, 	KC_ESC
