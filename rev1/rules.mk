@@ -1,6 +1,7 @@
 MCU = atmega32u4
 BOOTLOADER = atmel-dfu
-        
+
 SPLIT_KEYBOARD = yes
+EXTRAKEY_ENABLE = yes
 
 DEFAULT_FOLDER = 3D_Keyboard/rev1
