@@ -3,5 +3,6 @@ BOOTLOADER = atmel-dfu
 
 SPLIT_KEYBOARD = yes
 EXTRAKEY_ENABLE = yes
+MOUSKEY_ENABLE = yes
 
 DEFAULT_FOLDER = 3D_Keyboard/rev1
