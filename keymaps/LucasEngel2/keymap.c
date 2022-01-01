@@ -1,57 +1,66 @@
 #include "3D_Keyboard.h"
+#include "keymap_steno.h"
+#include "sendstring_dvorak.h"
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _BASE,
-    _MOD1,
-    _MOD2,
-    _MOD3,
-    _MOD4,
-    _MOD5
+    _DVORAK,
+    _STENO,
+    _GAMING,
+    _NUMPAD,
+    _CODING,
+    _FROW
 };
+
+#define ST_GEM QK_STENO_GEMINI
 
 // Defines your layered keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT(
-	KC_QUOT,	KC_COMM, 	KC_DOT, 	KC_P, 		KC_Y, 		KC_F, 		KC_G, 		KC_C, 		KC_R, 		KC_L,
-	KC_A,		KC_O,		KC_E, 		KC_U, 		KC_I, 		KC_D, 		KC_H, 		KC_T, 		KC_N, 		KC_S,
-	KC_SCLN, 	KC_Q, 		KC_J, 		KC_K, 		KC_X, 		KC_B, 		KC_M, 		KC_W, 		KC_V, 		KC_Z,
-				MO(_MOD2), 	KC_BSPC, 	KC_LSFT,	KC_ENT,     LCTL_T(KC_TAB),	MO(_MOD1),	KC_SPC,	TG(_MOD3)
+    [_DVORAK] = LAYOUT(
+	DV_QUOT,	DV_COMM, 	DV_DOT, 	DV_P, 		DV_Y, 		DV_F, 		DV_G, 		DV_C, 		DV_R, 		DV_L,
+	DV_A,		DV_O,		DV_E, 		DV_U, 		DV_I, 		DV_D, 		DV_H, 		DV_T, 		DV_N, 		DV_S,
+	DV_SCLN, 	DV_Q, 		DV_J, 		DV_K, 		DV_X, 		DV_B, 		DV_M, 		DV_W, 		DV_V, 		DV_Z,
+			KC_LSFT, 	KC_BSPC, 	MO(_CODING),	KC_ENT,     	LCTL_T(KC_TAB),	MO(_NUMPAD),	KC_SPC,		TO(_GAMING)
 ),
 
-    [_MOD1] = LAYOUT(
+    [_STENO] = LAYOUT(
+	STN_N1,  	STN_N2, 	STN_N3,  	STN_N4,  	STN_N5,  	STN_N6,  	STN_N7,  	STN_N8,  	STN_N9, 	STN_NA,
+  	STN_S1,  	STN_TL,  	STN_PL,  	STN_HL,  	STN_ST1, 	STN_FR,  	STN_PR,  	STN_LR,  	STN_TR,  	STN_DR,
+  	STN_S2,  	STN_KL,  	STN_WL,  	STN_RL,  	STN_ST2, 	STN_RR,  	STN_BR,  	STN_GR,  	STN_SR,  	STN_ZR,
+  			STN_A,   	STN_O,   	MO(_CODING),	KC_ENT,		TO(_DVORAK),	MO(_NUMPAD),	STN_E,   	STN_U
+),
+    
+    [_GAMING] = LAYOUT(
+	KC_TAB, 	DV_Q, 		DV_W, 		DV_E, 		DV_R, 		KC_NO, 		KC_NO, 		KC_NO,	 	KC_NO,		KC_NO,
+	KC_LSFT, 	DV_A, 		DV_S, 		DV_D, 		DV_F, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+	KC_LCTL, 	DV_Z, 		DV_X, 		DV_C, 		DV_V, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+			DV_1, 		KC_SPC,     	DV_2, 		DV_3, 		TO(_STENO), 	KC_NO, 		KC_NO, 		TO(_DVORAK)
+),
+
+    [_NUMPAD] = LAYOUT(
 	KC_NLCK, 	KC_P7, 		KC_P8, 		KC_P9, 		KC_EXLM, 	KC_NO, 		KC_NO, 		KC_UP, 		KC_NO, 		KC_NO,
 	KC_P0, 		KC_P4, 		KC_P5, 		KC_P6, 		KC_CIRC, 	KC_NO, 		KC_LEFT,	KC_DOWN,	KC_RGHT,	KC_LSFT,
-	KC_LALT, 	KC_P1, 		KC_P2, 		KC_P3, 		KC_PERC, 	LCTL(KC_V), LCTL(KC_C), MO(_MOD4), 	LCTL(KC_Z), KC_LCTL,
-				KC_PPLS,	KC_PMNS,	KC_PAST,	KC_PSLS, 	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO
+	KC_LALT, 	KC_P1, 		KC_P2, 		KC_P3, 		KC_PERC, 	LCTL(DV_V), 	LCTL(DV_C), 	MO(_FROW), 	LCTL(DV_Z), 	KC_LCTL,
+			KC_PPLS,	KC_PMNS,	KC_PAST,	KC_PSLS, 	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO
 ),
 
-    [_MOD2] = LAYOUT(
-	KC_NO, 	    KC_NO, 		KC_GRV, 	KC_AT, 		KC_NO, 		KC_NO, 		KC_MPRV, 	KC_MPLY, 	KC_MNXT, 	KC_NO,
-	KC_QUES, 	KC_HASH, 	KC_LPRN, 	KC_RPRN, 	KC_NO, 		KC_NO, 		KC_UNDS, 	KC_EQL, 	KC_BSLS,	KC_F5,
-	KC_LSFT,	KC_DLR, 	KC_LBRC, 	KC_RBRC, 	KC_NO, 		KC_NO, 		KC_TAB, 	KC_LALT, 	KC_AMPR, 	KC_NO,
-				KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		LALT(KC_F4),KC_LGUI, 	KC_DEL, 	KC_ESC
+    [_CODING] = LAYOUT(
+	KC_NO, 	    	KC_NO, 		DV_GRV, 	DV_AT, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+	DV_QUES, 	DV_HASH, 	DV_LPRN, 	DV_RPRN, 	KC_NO, 		KC_NO, 		DV_UNDS, 	DV_EQL, 	DV_BSLS,	KC_F5,
+	KC_LSFT,	DV_DLR, 	DV_LBRC, 	DV_RBRC, 	KC_NO, 		KC_NO, 		KC_TAB, 	KC_LALT, 	DV_AMPR, 	KC_NO,
+			KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		LALT(KC_F4),	KC_LGUI, 	KC_DEL, 	KC_ESC
 ),
 
-    [_MOD3] = LAYOUT(
-	KC_TAB, 	KC_Q, 		KC_W, 		KC_E, 		KC_R, 		KC_NO, 		KC_BTN1, 	KC_MS_U, 	KC_BTN2, 	KC_NO,
-	KC_LSFT, 	KC_A, 		KC_S, 		KC_D, 		KC_F, 		KC_NO, 		KC_MS_L, 	KC_MS_D, 	KC_MS_R, 	KC_NO,
-	KC_LCTL, 	KC_Z, 		KC_X, 		KC_C, 		KC_V, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
-				KC_1, 		KC_SPC,     KC_2, 		KC_3, 		TG(_MOD5), 	KC_NO, 		KC_NO, 		TG(_MOD3)
-),
 
-    [_MOD4] = LAYOUT(
-    KC_F1, 	   	KC_F2, 		KC_F3, 		KC_F4, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+    [_FROW] = LAYOUT(
+    	KC_F1, 	   	KC_F2, 		KC_F3, 		KC_F4, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
 	KC_F5,  	KC_F6, 		KC_F7, 		KC_F8, 		KC_NO,   	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
 	KC_F9, 	   	KC_F10, 	KC_F11, 	KC_F12, 	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
-		        KC_NO, 		KC_NO,      KC_NO, 	    KC_NO, 	    KC_NO, 		KC_NO, 		KC_NO, 		KC_NO
-),
-
-    [_MOD5] = LAYOUT(
-    KC_1, 	    KC_2,       KC_3, 	    KC_4,       KC_5,       KC_6, 	    KC_7,   	KC_8, 	    KC_9, 	    KC_0,
-    KC_Q,  	    KC_W, 		KC_E, 		KC_R, 		KC_T,   	KC_U, 		KC_I,       KC_O,       KC_P,       KC_LBRC,
-    KC_A, 	    KC_S, 	    KC_D, 	    KC_F, 	    KC_G, 	    KC_J, 		KC_K, 		KC_L, 		KC_SCLN, 	KC_QUOT,
-		        KC_C, 		KC_V,       KC_NO, 	    KC_NO, 	    TG(_MOD5), 	KC_NO, 		KC_N, 		KC_M
+		        KC_NO, 		KC_NO,      	KC_NO, 	    	KC_NO, 	    	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO
 )
 
 };
+
+void matrix_init_user() {
+    steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
+}

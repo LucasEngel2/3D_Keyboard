@@ -15,8 +15,7 @@
 #define DIODE_DIRECTION COL2ROW
 
 #define SPLIT_USB_DETECT
-
-#define DEBOUNCE 5
 #define FORCE_NKRO
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
+#define EE_HANDS

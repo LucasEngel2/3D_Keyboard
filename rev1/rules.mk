@@ -1,8 +1,10 @@
-MCU = atmega32u4
-BOOTLOADER = atmel-dfu
+MCU			= atmega32u4
+BOOTLOADER		= atmel-dfu
 
-SPLIT_KEYBOARD = yes
-EXTRAKEY_ENABLE = yes
-MOUSEKEY_ENABLE = yes
+SPLIT_KEYBOARD		= yes
+STENO_ENABLE		= yes
+MOUSEKEY_ENABLE		= no
+EXTRAKEY_ENABLE		= no
+NKRO_ENABLE		= yes
 
-DEFAULT_FOLDER = 3D_Keyboard/rev1
+DEFAULT_FOLDER		= 3D_Keyboard/rev1
