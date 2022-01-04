@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
     [_CODING] = LAYOUT(
-	DV_GRV, 	LALT(KC_LEFT), 	LALT(KC_RIGHT), DV_AT, 		KC_NO, 		X(UC_AE), 	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+	DV_GRV, 	LALT(KC_LEFT), 	LALT(KC_RIGHT), DV_AT, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
 	DV_QUES, 	DV_HASH, 	DV_LPRN, 	DV_RPRN, 	KC_NO, 		KC_NO, 		DV_UNDS, 	DV_EQL, 	DV_BSLS,	KC_F5,
 	KC_LSFT,	DV_DLR, 	DV_LBRC, 	DV_RBRC, 	KC_NO, 		KC_NO, 		KC_TAB, 	KC_LALT, 	DV_AMPR, 	KC_NO,
 			KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		LALT(KC_F4),	KC_LGUI, 	KC_DEL, 	KC_ESC
@@ -85,9 +85,9 @@ const uint16_t PROGMEM oe_combo[] = {DV_O, DV_E, COMBO_END};
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 combo_t key_combos[] = {
-    [AE] = COMBO_ACTION(ae_combo),
-    [UE] = COMBO_ACTION(ue_combo),
-    [OE] = COMBO_ACTION(oe_combo)
+    [AE] = COMBO(ae_combo, XP(0,3)),
+    [UE] = COMBO(ue_combo, XP(1,4)),
+    [OE] = COMBO(oe_combo, XP(2,5))
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -98,26 +98,6 @@ const uint32_t PROGMEM unicode_map[] = {
 	[UC_UEP] = 0x00DC,
 	[UC_OEP] = 0x00D6
 	
-};
-
-void process_combo_event(uint16_t combo_index, bool pressed) {
-	switch(combo_index) {
-		case AE:
-			if(pressed) {
-				XP(0,3);
-			}
-			break;
-		case UE:
-			if(pressed) {
-				XP(1,4);
-			}
-			break;
-		case OE:
-			if(pressed) {
-				XP(2,5);
-			}
-			break;
-	}
 };
 
 void matrix_init_user() {
