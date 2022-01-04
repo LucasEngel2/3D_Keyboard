@@ -1,7 +1,6 @@
 #include "3D_Keyboard.h"
 #include "keymap_steno.h"
 #include "sendstring_dvorak.h"
-#include "sendstring_german.h"
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
@@ -13,10 +12,11 @@ enum layer_names {
     _FROW
 };
 
-enum combos {
+enum combo_events {
 	AE,
 	UE,
-	OE
+	OE,
+	COMBO_LENGTH
 };
 
 #define ST_GEM QK_STENO_GEMINI
@@ -68,17 +68,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-void matrix_init_user() {
-    steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
-};
-
 const uint16_t PROGMEM ae_combo[] = {DV_A, DV_E, COMBO_END};
 const uint16_t PROGMEM ue_combo[] = {DV_U, DV_E, COMBO_END};
 const uint16_t PROGMEM oe_combo[] = {DV_O, DV_E, COMBO_END};
 
-combo_t key_combos[COMBO_COUNT] = {
-    [AE] = COMBO(ae_combo, DE_ADIA),
-    [UE] = COMBO(ue_combo, DE_UDIA),
-    [OE] = COMBO(oe_combo, DE_ODIA)
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
+combo_t key_combos[] = {
+    [AE] = COMBO_ACTION(ae_combo),
+    [UE] = COMBO_ACTION(ue_combo),
+    [OE] = COMBO_ACTION(oe_combo)
 };
 
+void process_combo_event(uint16_t combo_index, bool pressed) {
+	switch(combo_index) {
+		case AE:
+			if(pressed) {
+				SEND_STRING("ä");
+			}
+			break;
+		case UE:
+			if(pressed) {
+				SEND_STRING("ü");
+			}
+			break;
+		case OE:
+			if(pressed) {
+				SEND_STRING("ö");
+			}
+			break;
+	}
+};
+
+void matrix_init_user() {
+    steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
+};
