@@ -19,6 +19,16 @@ enum combo_events {
 	COMBO_LENGTH
 };
 
+enum unicode_name {
+	UC_AE,
+	UC_UE,
+	UC_OE,
+	UC_AEP,
+	UC_UEP,
+	UC_OEP
+
+};
+
 #define ST_GEM QK_STENO_GEMINI
 
 // Defines your layered keymaps
@@ -52,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
     [_CODING] = LAYOUT(
-	DV_GRV, 	LALT(KC_LEFT), 	LALT(KC_RIGHT), DV_AT, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
+	DV_GRV, 	LALT(KC_LEFT), 	LALT(KC_RIGHT), DV_AT, 		KC_NO, 		X(UC_AE), 	KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
 	DV_QUES, 	DV_HASH, 	DV_LPRN, 	DV_RPRN, 	KC_NO, 		KC_NO, 		DV_UNDS, 	DV_EQL, 	DV_BSLS,	KC_F5,
 	KC_LSFT,	DV_DLR, 	DV_LBRC, 	DV_RBRC, 	KC_NO, 		KC_NO, 		KC_TAB, 	KC_LALT, 	DV_AMPR, 	KC_NO,
 			KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		LALT(KC_F4),	KC_LGUI, 	KC_DEL, 	KC_ESC
@@ -80,21 +90,31 @@ combo_t key_combos[] = {
     [OE] = COMBO_ACTION(oe_combo)
 };
 
+const uint32_t PROGMEM unicode_map[] = {
+	[UC_AE] = 0x00E4,
+	[UC_UE] = 0x00FC,
+	[UC_OE] = 0x00F6,
+	[UC_AEP] = 0x00C4,
+	[UC_UEP] = 0x00DC,
+	[UC_OEP] = 0x00D6
+	
+};
+
 void process_combo_event(uint16_t combo_index, bool pressed) {
 	switch(combo_index) {
 		case AE:
 			if(pressed) {
-				SEND_STRING("ä");
+				XP(0,3);
 			}
 			break;
 		case UE:
 			if(pressed) {
-				SEND_STRING("ü");
+				XP(1,4);
 			}
 			break;
 		case OE:
 			if(pressed) {
-				SEND_STRING("ö");
+				XP(2,5);
 			}
 			break;
 	}
