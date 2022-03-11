@@ -12,11 +12,10 @@ enum layer_names {
 	_FROW
 };
 
-enum combo_events {
+enum combos {
 	AE,
 	UE,
-	OE,
-	COMBO_LENGTH
+	OE
 };
 
 enum unicode_name {
@@ -29,8 +28,15 @@ enum unicode_name {
 
 };
 
-#define ST_GEM QK_STENO_GEMINI
-#define UNICODE_SELECTED_MODES UC_LNX
+const uint32_t PROGMEM unicode_map[] = {
+	[UC_AE] = 0x00E4,
+	[UC_UE] = 0x00FC,
+	[UC_OE] = 0x00F6,
+	[UC_AEP] = 0x00C4,
+	[UC_UEP] = 0x00DC,
+	[UC_OEP] = 0x00D6
+	
+};
 
 // Defines your layered keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -83,24 +89,10 @@ const uint16_t PROGMEM ae_combo[] = {DV_A, DV_E, COMBO_END};
 const uint16_t PROGMEM ue_combo[] = {DV_U, DV_E, COMBO_END};
 const uint16_t PROGMEM oe_combo[] = {DV_O, DV_E, COMBO_END};
 
-uint16_t COMBO_LEN = COMBO_LENGTH;
-
-combo_t key_combos[] = {
+combo_t key_combos[COMBO_COUNT] = {
     [AE] = COMBO(ae_combo, XP(0,3)),
     [UE] = COMBO(ue_combo, XP(1,4)),
     [OE] = COMBO(oe_combo, XP(2,5))
 };
 
-const uint32_t PROGMEM unicode_map[] = {
-	[UC_AE] = 0x00E4,
-	[UC_UE] = 0x00FC,
-	[UC_OE] = 0x00F6,
-	[UC_AEP] = 0x00C4,
-	[UC_UEP] = 0x00DC,
-	[UC_OEP] = 0x00D6
-	
-};
 
-void matrix_init_user() {
-    steno_set_mode(STENO_MODE_GEMINI); // or STENO_MODE_BOLT
-};
