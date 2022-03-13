@@ -2,7 +2,6 @@ MCU			= atmega32u4
 BOOTLOADER		= atmel-dfu
 
 SPLIT_KEYBOARD		= yes
-STENO_ENABLE		= yes
 MOUSEKEY_ENABLE		= yes
 EXTRAKEY_ENABLE		= yes
 NKRO_ENABLE		= yes

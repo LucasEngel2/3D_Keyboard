@@ -1,11 +1,8 @@
 #include "3D_Keyboard.h"
-#include "keymap_steno.h"
 #include "sendstring_dvorak.h"
 
-// Defines names for use in layer keycodes and the keymap
 enum layer_names {
 	_DVORAK,
-	_STENO,
 	_GAMING,
 	_NUMPAD,
 	_CODING,
@@ -38,7 +35,6 @@ const uint32_t PROGMEM unicode_map[] = {
 	
 };
 
-// Defines your layered keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DVORAK] = LAYOUT(
 	DV_QUOT,	DV_COMM, 	DV_DOT, 	DV_P, 		DV_Y, 		DV_F, 		DV_G, 		DV_C, 		DV_R, 		DV_L,
@@ -47,13 +43,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			KC_LSFT, 	KC_BSPC, 	MO(_CODING),	KC_ENT,     	LCTL_T(KC_TAB),	MO(_NUMPAD),	KC_SPC,		TO(_GAMING)
 ),
 
-    [_STENO] = LAYOUT(
-	STN_N1,  	STN_N2, 	STN_N3,  	STN_N4,  	STN_N5,  	STN_N6,  	STN_N7,  	STN_N8,  	STN_N9, 	STN_NA,
-  	STN_S1,  	STN_TL,  	STN_PL,  	STN_HL,  	STN_ST1, 	STN_FR,  	STN_PR,  	STN_LR,  	STN_TR,  	STN_DR,
-  	STN_S2,  	STN_KL,  	STN_WL,  	STN_RL,  	STN_ST2, 	STN_RR,  	STN_BR,  	STN_GR,  	STN_SR,  	STN_ZR,
-  			STN_A,   	STN_O,   	MO(_CODING),	KC_ENT,		TO(_DVORAK),	MO(_NUMPAD),	STN_E,   	STN_U
-),
-    
     [_GAMING] = LAYOUT(
 	KC_TAB, 	DV_Q, 		DV_W, 		DV_E, 		DV_R, 		KC_NO, 		KC_BTN1,	KC_MS_U, 	KC_BTN2,	KC_BTN3,
 	KC_LSFT, 	DV_A, 		DV_S, 		DV_D, 		DV_F, 		KC_NO, 		KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_NO,
@@ -94,5 +83,3 @@ combo_t key_combos[COMBO_COUNT] = {
     [UE] = COMBO(ue_combo, XP(1,4)),
     [OE] = COMBO(oe_combo, XP(2,5))
 };
-
-
