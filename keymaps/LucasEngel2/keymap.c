@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB, 	DV_Q, 		DV_W, 		DV_E, 		DV_R, 		KC_NO, 		KC_BTN1,	KC_MS_U, 	KC_BTN2,	KC_BTN3,
 	KC_LSFT, 	DV_A, 		DV_S, 		DV_D, 		DV_F, 		KC_NO, 		KC_MS_L,	KC_MS_D,	KC_MS_R,	KC_NO,
 	KC_LCTL, 	DV_Z, 		DV_X, 		DV_C, 		DV_V, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO, 		KC_NO,
-			DV_1, 		KC_SPC,     	DV_2, 		DV_3, 		TO(_STENO), 	KC_NO, 		KC_NO, 		TO(_DVORAK)
+			DV_1, 		KC_SPC,     	DV_2, 		DV_3, 		KC_NO,	 	KC_NO, 		KC_NO, 		TO(_DVORAK)
 ),
 
     [_NUMPAD] = LAYOUT(
